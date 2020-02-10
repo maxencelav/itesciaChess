@@ -77,3 +77,10 @@ fabric.properties
 target/
 *.xml
 .idea/misc.xml
+lib/
+info/
+sprites/
+favicon.ico
+icon16x16.png
+icon32x32.png
+.DS_Store
