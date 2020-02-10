@@ -8,7 +8,7 @@
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/compiler.xml
-.idea/
+.idea/**
 
 
 # Generated files
