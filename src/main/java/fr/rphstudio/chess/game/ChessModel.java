@@ -56,7 +56,24 @@ public class ChessModel implements IChess {
 
     @Override
     public int getNbRemainingPieces(ChessColor color) {
-        return 0;
+
+        int colorCounter = 0;
+
+        for (int y = 0; y < BOARD_HEIGHT; y++) {
+            for (int x = 0; x < BOARD_WIDTH; x++) {
+                System.out.println(x + "," + y);
+                try {
+                    System.out.println(chessBoard.getPiece(new ChessPosition(x, y)).getPieceColor());
+                    if (chessBoard.getPiece(new ChessPosition(x, y)).getPieceColor() == color) {
+                        colorCounter++;
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println(e + "No color found");
+                }
+
+            }
+        }
+        return colorCounter;
     }
 
     @Override
