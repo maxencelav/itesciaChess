@@ -69,10 +69,10 @@ public class Piece {
         return null;
     }
 
-    public static List<IChess.ChessPosition> getMovesDirection(int dX, int dY, IChess.ChessPosition p, ChessBoard board) {
+    public static List<IChess.ChessPosition> getMovesDirection(int dX, int dY, IChess.ChessPosition p, ChessBoard board, int size) {
         List<IChess.ChessPosition> possibleMoves = new ArrayList<IChess.ChessPosition>();
 
-        for (int dist = 1; dist <= 7; dist++) {
+        for (int dist = 1; dist <= size; dist++) {
             IChess.ChessPosition pos = Piece.checkPositionOnBoard(p.x + (dist * dX), p.y + (dist * dY), board);
 
 
@@ -94,20 +94,20 @@ public class Piece {
         return possibleMoves;
     }
 
-    public static List<IChess.ChessPosition> getMoveDiagonal(IChess.ChessPosition p, ChessBoard board){
+    public static List<IChess.ChessPosition> getMoveDiagonal(IChess.ChessPosition p, ChessBoard board, int size) {
         List<IChess.ChessPosition> tempList = new ArrayList<>();
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
 
-        tempList = Piece.getMovesDirection(1, 1, p, board);
+        tempList = Piece.getMovesDirection(1, 1, p, board, size);
         possibleMoves.addAll(tempList);
 
-        tempList = Piece.getMovesDirection(1, -1, p, board);
+        tempList = Piece.getMovesDirection(1, -1, p, board, size);
         possibleMoves.addAll(tempList);
 
-        tempList = Piece.getMovesDirection(-1, 1, p, board);
+        tempList = Piece.getMovesDirection(-1, 1, p, board, size);
         possibleMoves.addAll(tempList);
 
-        tempList = Piece.getMovesDirection(-1, -1, p, board);
+        tempList = Piece.getMovesDirection(-1, -1, p, board, size);
         possibleMoves.addAll(tempList);
 
 
@@ -115,20 +115,20 @@ public class Piece {
 
     }
 
-    public static List<IChess.ChessPosition> getMoveOrthogonal(IChess.ChessPosition p, ChessBoard board){
+    public static List<IChess.ChessPosition> getMoveOrthogonal(IChess.ChessPosition p, ChessBoard board, int size) {
         List<IChess.ChessPosition> tempList = new ArrayList<>();
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
 
-        tempList = Piece.getMovesDirection(1, 0, p, board);
+        tempList = Piece.getMovesDirection(1, 0, p, board, size);
         possibleMoves.addAll(tempList);
 
-        tempList = Piece.getMovesDirection(-1, 0, p, board);
+        tempList = Piece.getMovesDirection(-1, 0, p, board, size);
         possibleMoves.addAll(tempList);
 
-        tempList = Piece.getMovesDirection(0, 1, p, board);
+        tempList = Piece.getMovesDirection(0, 1, p, board, size);
         possibleMoves.addAll(tempList);
 
-        tempList = Piece.getMovesDirection(0, -1, p, board);
+        tempList = Piece.getMovesDirection(0, -1, p, board, size);
         possibleMoves.addAll(tempList);
 
 

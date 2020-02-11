@@ -12,6 +12,6 @@ public class Bishop implements IMove {
 
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
-        return Piece.getMoveDiagonal(p, board);
+        return Piece.getMoveDiagonal(p, board, IChess.BOARD_WIDTH);
     }
 }

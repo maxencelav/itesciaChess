@@ -13,8 +13,8 @@ public class Queen implements IMove {
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
         List<IChess.ChessPosition> positions = new ArrayList<>();
 
-        positions.addAll(Piece.getMoveDiagonal(p, board));
-        positions.addAll(Piece.getMoveOrthogonal(p, board));
+        positions.addAll(Piece.getMoveDiagonal(p, board, IChess.BOARD_WIDTH));
+        positions.addAll(Piece.getMoveOrthogonal(p, board, IChess.BOARD_WIDTH));
 
         return positions;
     }

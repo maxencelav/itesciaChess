@@ -11,6 +11,6 @@ import java.util.List;
 public class Rook implements IMove {
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
-        return Piece.getMoveOrthogonal(p, board);
+        return Piece.getMoveOrthogonal(p, board, IChess.BOARD_WIDTH);
     }
 }

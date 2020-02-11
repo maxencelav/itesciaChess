@@ -12,18 +12,12 @@ public class King implements IMove {
 
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
-        List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
+        List<IChess.ChessPosition> positions = new ArrayList<>();
 
-        int[] posX = {p.x + 1, p.x + 1, p.x + 1, p.x, p.x , p.x - 1, p.x - 1, p.x - 1};
-        int[] posY = {p.y, p.y + 1, p.y - 1, p.y + 1, p.y - 1, p.y , p.y - 1, p.y + 1};
+        positions.addAll(Piece.getMoveDiagonal(p, board, 1));
+        positions.addAll(Piece.getMoveOrthogonal(p, board,1));
 
-        for (int i = 0; i < posX.length; i++) {
-            IChess.ChessPosition pos = Piece.checkPositionOnBoard(posX[i], posY[i], board);
-            if (pos != null) {
-                possibleMoves.add(pos);
-            }
-        }
-        return possibleMoves;
+        return positions;
     }
 
 
