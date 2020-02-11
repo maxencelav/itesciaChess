@@ -1,6 +1,7 @@
 package fr.rphstudio.chess.game.pieces;
 
 import fr.rphstudio.chess.game.ChessBoard;
+import fr.rphstudio.chess.game.Piece;
 import fr.rphstudio.chess.interf.IChess;
 import fr.rphstudio.chess.interf.IMove;
 
@@ -31,15 +32,12 @@ public class Rook implements IMove {
         }
 
         for (int i = 0; i < posX.size(); i++) {
-            IChess.ChessPosition dest = new IChess.ChessPosition(posX.get(i), posY.get(i));
-            if ((posX.get(i) >= 0 && posX.get(i) < 8 && posY.get(i) >= 0 && posY.get(i) < 8) && board.getPiece(dest) == null) {
-
-                possibleMoves.add(dest);
-
+            IChess.ChessPosition pos = Piece.checkMoves(posX.get(i), posY.get(i), board);
+            if (pos != null) {
+                possibleMoves.add(pos);
+            }
                 //si couleur adverse on arrête au x de la case
                 // si couleur alliée on arrête au x avant la case
-
-            }
 
         }
         return possibleMoves;

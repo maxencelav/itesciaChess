@@ -1,6 +1,7 @@
 package fr.rphstudio.chess.game;
 
 import fr.rphstudio.chess.game.pieces.*;
+import fr.rphstudio.chess.interf.EmptyCellException;
 import fr.rphstudio.chess.interf.IChess;
 import fr.rphstudio.chess.interf.IMove;
 
@@ -53,6 +54,14 @@ public class Piece  {
     public List<IChess.ChessPosition> getMoves(IChess.ChessPosition p, ChessBoard chessBoard){
 
        return pieceMove.getPossibleMoves(p, chessBoard);
+    }
+
+    public static IChess.ChessPosition checkMoves(int x, int y, ChessBoard board) {
+        IChess.ChessPosition dest = new IChess.ChessPosition(x, y);
+        if ((x >= 0 && x < 8 && y >= 0 && y < 8) && board.getPiece(dest) == null) {
+            return dest;
+        }
+        return null;
     }
 
 }

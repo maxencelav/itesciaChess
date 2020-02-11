@@ -21,16 +21,12 @@ public class Knight implements IMove {
         int[] posX = {p.x + 1, p.x + 1, p.x + 2, p.x + 2, p.x - 1, p.x - 1, p.x - 2, p.x - 2};
         int[] posY = {p.y - 2, p.y + 2, p.y - 1, p.y + 1, p.y - 2, p.y + 2, p.y - 1, p.y + 1};
 
-        for (int i = 0; i < 8; i++) {
-            IChess.ChessPosition dest = new IChess.ChessPosition(posX[i], posY[i]);
-            if ((posX[i] >= 0 && posX[i] < 8 && posY[i] >= 0 && posY[i] < 8) && board.getPiece(dest) == null) {
-                possibleMoves.add(dest);
-
+        for (int i = 0; i < posX.length; i++) {
+            IChess.ChessPosition pos = Piece.checkMoves(posX[i], posY[i], board);
+            if (pos != null) {
+                possibleMoves.add(pos);
             }
-
         }
-
-
         return possibleMoves;
     }
 }

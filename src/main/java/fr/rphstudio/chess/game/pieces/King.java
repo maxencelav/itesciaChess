@@ -1,6 +1,7 @@
 package fr.rphstudio.chess.game.pieces;
 
 import fr.rphstudio.chess.game.ChessBoard;
+import fr.rphstudio.chess.game.Piece;
 import fr.rphstudio.chess.interf.IChess;
 import fr.rphstudio.chess.interf.IMove;
 
@@ -16,16 +17,12 @@ public class King implements IMove {
         int[] posX = {p.x + 1, p.x + 1, p.x + 1, p.x, p.x , p.x - 1, p.x - 1, p.x - 1};
         int[] posY = {p.y, p.y + 1, p.y - 1, p.y + 1, p.y - 1, p.y , p.y - 1, p.y + 1};
 
-        for (int i = 0; i < 8; i++) {
-            IChess.ChessPosition dest = new IChess.ChessPosition(posX[i], posY[i]);
-            if ((posX[i] >= 0 && posX[i] < 8 && posY[i] >= 0 && posY[i] < 8) && board.getPiece(dest) == null) {
-                possibleMoves.add(dest);
-
+        for (int i = 0; i < posX.length; i++) {
+            IChess.ChessPosition pos = Piece.checkMoves(posX[i], posY[i], board);
+            if (pos != null) {
+                possibleMoves.add(pos);
             }
-
         }
-
-
         return possibleMoves;
     }
 
