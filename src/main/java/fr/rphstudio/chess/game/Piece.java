@@ -10,22 +10,11 @@ public class Piece  {
 
     private IChess.ChessColor pieceColor;
     private IChess.ChessType pieceType;
+    private IMove pieceMove;
 
     public Piece(IChess.ChessColor pieceColor, IChess.ChessType pieceType) {
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
-    }
-
-    public IChess.ChessColor getPieceColor() {
-        return pieceColor;
-    }
-
-
-    public IChess.ChessType getPieceType() {
-        return pieceType;
-    }
-
-    public List<IChess.ChessPosition> getMoves(IChess.ChessPosition p){
 
         IMove moveType;
         switch (this.pieceType){
@@ -48,8 +37,22 @@ public class Piece  {
                 moveType = new Queen();
                 break;
         }
+        this.pieceMove = moveType;
 
-       return moveType.getPossibleMoves(p, new ChessBoard());
+    }
+
+    public IChess.ChessColor getPieceColor() {
+        return pieceColor;
+    }
+
+
+    public IChess.ChessType getPieceType() {
+        return pieceType;
+    }
+
+    public List<IChess.ChessPosition> getMoves(IChess.ChessPosition p, ChessBoard chessBoard){
+
+       return pieceMove.getPossibleMoves(p, chessBoard);
     }
 
 }

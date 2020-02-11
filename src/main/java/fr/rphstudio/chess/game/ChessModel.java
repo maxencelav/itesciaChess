@@ -78,8 +78,8 @@ public class ChessModel implements IChess {
 
     @Override
     public List<ChessPosition> getPieceMoves(ChessPosition p) {
-
-        return chessBoard.getPiece(p).getMoves(p);
+        //rendre robuste (check null par try catch)
+        return chessBoard.getPiece(p).getMoves(p, chessBoard);
     }
 
     @Override
