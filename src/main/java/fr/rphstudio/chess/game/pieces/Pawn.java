@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Pawn implements IMove {
     @Override
-    public List<IChess.ChessPosition> getPieceMoves(IChess.ChessPosition p) {
+    public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p) {
         return null;
     }
 }
