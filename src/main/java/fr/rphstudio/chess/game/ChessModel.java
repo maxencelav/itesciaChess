@@ -34,7 +34,6 @@ public class ChessModel implements IChess {
     @Override
     public ChessType getPieceType(ChessPosition p) throws EmptyCellException, OutOfBoardException {
 
-
         Piece currentPiece = chessBoard.getPiece(p);
         if (currentPiece != null) {
             return currentPiece.getPieceType();

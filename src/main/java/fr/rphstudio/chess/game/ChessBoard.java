@@ -37,7 +37,13 @@ public class ChessBoard {
     }
 
     public Piece getPiece(IChess.ChessPosition pos) {
-        return board[pos.x][pos.y];
+        try {
+            return board[pos.x][pos.y];
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        }
     }
 
     public Piece removePiece(IChess.ChessPosition pos) {
