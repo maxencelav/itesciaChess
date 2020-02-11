@@ -13,8 +13,22 @@ public class King implements IMove {
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
 
-        possibleMoves.add((new IChess.ChessPosition(4,7)));
+        int[] posX = {p.x + 1, p.x + 1, p.x + 1, p.x, p.x , p.x - 1, p.x - 1, p.x - 1};
+        int[] posY = {p.y, p.y + 1, p.y - 1, p.y + 1, p.y - 1, p.y , p.y - 1, p.y + 1};
 
-        return  possibleMoves;
+        for (int i = 0; i < 8; i++) {
+            IChess.ChessPosition dest = new IChess.ChessPosition(posX[i], posY[i]);
+            if ((posX[i] >= 0 && posX[i] < 8 && posY[i] >= 0 && posY[i] < 8) && board.getPiece(dest) == null) {
+                possibleMoves.add(dest);
+
+            }
+
+        }
+
+
+        return possibleMoves;
     }
+
+
 }
+
