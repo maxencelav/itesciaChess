@@ -14,7 +14,7 @@ public class Knight implements IMove {
     }
 
     @Override
-    public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p) {
+    public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
 
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
 
@@ -22,7 +22,7 @@ public class Knight implements IMove {
         int[] posY ={p.y-2,p.y+2,p.y-1,p.y+1,p.y-2,p.y+2,p.y-1,p.y+1};
 
         for(int i=0;i<8;i++)
-            if((posX[i]>=0 && posX[i] < 8 && posY[i] >= 0 && posY[i] < 8))
+            if((posX[i]>=0 && posX[i] < 8 && posY[i] >= 0 && posY[i] < 8) && board.getPiece(new IChess.ChessPosition(posX[i],posY[i])) == null)
                 possibleMoves.add(new IChess.ChessPosition(posX[i],posY[i]));
 
         return possibleMoves;
