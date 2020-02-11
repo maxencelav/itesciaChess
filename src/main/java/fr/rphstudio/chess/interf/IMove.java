@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface IMove {
 
-    public List<IChess.ChessPosition> getPieceMoves(IChess.ChessPosition p);
+    public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p);
 }

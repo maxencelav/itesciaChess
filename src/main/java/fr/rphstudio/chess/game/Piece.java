@@ -4,6 +4,8 @@ import fr.rphstudio.chess.game.pieces.Knight;
 import fr.rphstudio.chess.interf.IChess;
 import fr.rphstudio.chess.interf.IMove;
 
+import java.util.List;
+
 public class Piece  {
 
     private IChess.ChessColor pieceColor;
@@ -24,8 +26,8 @@ public class Piece  {
         return pieceType;
     }
 
-    public IMove getMoveType(){
-       return this.moveType;
+    public List<IChess.ChessPosition> getMoves(IChess.ChessPosition p){
+       return this.moveType.getPossibleMoves(p);
     }
 
 }

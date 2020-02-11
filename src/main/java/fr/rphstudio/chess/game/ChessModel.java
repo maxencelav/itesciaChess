@@ -78,7 +78,8 @@ public class ChessModel implements IChess {
 
     @Override
     public List<ChessPosition> getPieceMoves(ChessPosition p) {
-        return new ArrayList<ChessPosition>();
+
+        return chessBoard.getPiece(p).getMoves(p);
     }
 
     @Override
