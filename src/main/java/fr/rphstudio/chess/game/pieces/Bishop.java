@@ -35,12 +35,25 @@ public class Bishop implements IMove {
 
         for (int i = 0; i < posX.size(); i++) {
             IChess.ChessPosition pos = Piece.checkMoves(posX.get(i), posY.get(i), board);
-            if (pos != null) {
-                possibleMoves.add(pos);
+
+            try {
+
+                Piece currentPiece = board.getPiece(new IChess.ChessPosition(p.x, p.y));
+                System.out.println("cP " + currentPiece.getPieceColor());
+                Piece wantedPiece = board.getPiece(new IChess.ChessPosition(posX.get(i), posY.get(i)));
+                System.out.println("wP " + wantedPiece.getPieceColor());
+
+                if (pos != null || currentPiece.getPieceColor() != wantedPiece.getPieceColor()) {
+                    possibleMoves.add(pos);
+                }
+
+            } catch (Exception e) {
+
             }
 
-                //si couleur adverse on arrête au x de la case
-                // si couleur alliée on arrête au x avant la case
+
+            // si couleur adverse on arrête au x de la case
+            // si couleur alliée on arrête au x avant la case
         }
         return possibleMoves;
     }
