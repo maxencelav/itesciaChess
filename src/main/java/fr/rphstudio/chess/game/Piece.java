@@ -7,31 +7,33 @@ import fr.rphstudio.chess.interf.IMove;
 
 import java.util.List;
 
-public class Piece  {
+public class Piece {
 
     private IChess.ChessColor pieceColor;
     private IChess.ChessType pieceType;
     private IMove pieceMove;
+    private int numberOfTurns;
 
     public Piece(IChess.ChessColor pieceColor, IChess.ChessType pieceType) {
         this.pieceColor = pieceColor;
         this.pieceType = pieceType;
+        this.numberOfTurns = 0;
 
         IMove moveType;
-        switch (this.pieceType){
+        switch (this.pieceType) {
             case TYP_KNIGHT:
                 moveType = new Knight();
                 break;
             case TYP_PAWN:
                 moveType = new Pawn();
                 break;
-            case TYP_BISHOP :
+            case TYP_BISHOP:
                 moveType = new Bishop();
                 break;
-            case TYP_ROOK :
+            case TYP_ROOK:
                 moveType = new Rook();
                 break;
-            case TYP_KING :
+            case TYP_KING:
                 moveType = new King();
                 break;
             default:
@@ -46,22 +48,32 @@ public class Piece  {
         return pieceColor;
     }
 
-
     public IChess.ChessType getPieceType() {
         return pieceType;
     }
 
-    public List<IChess.ChessPosition> getMoves(IChess.ChessPosition p, ChessBoard chessBoard){
-
-       return pieceMove.getPossibleMoves(p, chessBoard);
+    public int getNumberOfTurns() {
+        return numberOfTurns;
     }
 
-    public static IChess.ChessPosition checkMoves(int x, int y, ChessBoard board) {
+    public List<IChess.ChessPosition> getMoves(IChess.ChessPosition p, ChessBoard chessBoard) {
+        return pieceMove.getPossibleMoves(p, chessBoard);
+    }
+
+    public static IChess.ChessPosition checkPositionOnBoard(int x, int y, ChessBoard board) {
         IChess.ChessPosition dest = new IChess.ChessPosition(x, y);
-        if ((x >= 0 && x < 8 && y >= 0 && y < 8) && board.getPiece(dest) == null) {
+        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
             return dest;
         }
         return null;
+    }
+
+    public void increaseNbTurns() {
+        numberOfTurns++;
+    }
+
+    public boolean hasMoved() {
+        return (this.numberOfTurns > 0);
     }
 
 }

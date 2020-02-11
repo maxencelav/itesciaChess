@@ -41,7 +41,7 @@ public class Queen implements IMove {
         }
 
         for (int i = 0; i < posX.size(); i++) {
-            IChess.ChessPosition pos = Piece.checkMoves(posX.get(i), posY.get(i), board);
+            IChess.ChessPosition pos = Piece.checkPositionOnBoard(posX.get(i), posY.get(i), board);
             if (pos != null) {
                 possibleMoves.add(pos);
             }

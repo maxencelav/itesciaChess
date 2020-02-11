@@ -60,14 +60,14 @@ public class ChessModel implements IChess {
 
         for (int y = 0; y < BOARD_HEIGHT; y++) {
             for (int x = 0; x < BOARD_WIDTH; x++) {
-                System.out.println(x + "," + y);
+                //System.out.println(x + "," + y);
                 try {
-                    System.out.println(chessBoard.getPiece(new ChessPosition(x, y)).getPieceColor());
+                    //System.out.println(chessBoard.getPiece(new ChessPosition(x, y)).getPieceColor());
                     if (chessBoard.getPiece(new ChessPosition(x, y)).getPieceColor() == color) {
                         colorCounter++;
                     }
                 } catch (NullPointerException e) {
-                    System.out.println(e + "No color found");
+                    //System.out.println(e + "No color found");
                 }
 
             }

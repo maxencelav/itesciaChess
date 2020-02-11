@@ -41,7 +41,7 @@ public class ChessBoard {
             return board[pos.x][pos.y];
 
         } catch (Exception e) {
-            System.out.println(e);
+            //System.out.println(e);
             return null;
         }
     }
@@ -62,6 +62,7 @@ public class ChessBoard {
         Piece removedPiece = this.removePiece(pos1);
 
         this.addPiece(pos1, pieceToMove);
+        pieceToMove.increaseNbTurns();
         return removedPiece;
     }
 
