@@ -40,4 +40,25 @@ public class ChessBoard {
     public Piece getPiece(IChess.ChessPosition pos) {
         return board[pos.x][pos.y];
     }
+
+    public Piece removePiece(IChess.ChessPosition pos) {
+        Piece removedPiece = this.board[pos.x][pos.y];
+        this.board[pos.x][pos.y] = null;
+        return removedPiece;
+    }
+
+    public void addPiece(IChess.ChessPosition pos, Piece chessPiece) {
+        this.board[pos.x][pos.y] = chessPiece;
+        return;
+    }
+
+    public Piece movePiece(IChess.ChessPosition pos0, IChess.ChessPosition pos1) {
+        Piece pieceToMove = this.removePiece(pos0);
+        Piece removedPiece = this.removePiece(pos1);
+
+        this.addPiece(pos1, pieceToMove);
+        return removedPiece;
+    }
+
+
 }
