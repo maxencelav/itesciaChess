@@ -80,4 +80,44 @@ public class ChessUtils {
         return possibleMoves;
 
     }
+
+    public static boolean canGetEaten(IChess.ChessPosition pos, ChessBoard board) {
+        ArrayList<IChess.ChessPosition> positions;
+
+        if (pos != null) { // if pos exists
+            Piece pieceAtPos = board.getPiece(pos); // get piece
+            if (pieceAtPos != null) { // if piece exists
+                positions = getPosInDanger(pieceAtPos.getPieceColor(), board);
+                for (IChess.ChessPosition posToCheck : positions) {
+                    if (posToCheck.equals(pos)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns
+     *
+     * @param color Color of the pieces that will get returned
+     */
+    public static ArrayList<IChess.ChessPosition> getPosInDanger(IChess.ChessColor color, ChessBoard board) {
+        ArrayList<IChess.ChessPosition> positions = new ArrayList<>();
+
+        for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
+            for (int y = 0; y < IChess.BOARD_HEIGHT; y++) {
+                IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(x, y, board);
+                if (pos != null) { // if pos exists
+                    Piece pieceAtPos = board.getPiece(pos); // get piece
+                    if (pieceAtPos != null && pieceAtPos.getPieceColor() != color) { // if piece exists
+                        positions.addAll(pieceAtPos.getMoves(pos, board));
+                    }
+                }
+            }
+        }
+        return positions;
+    }
 }

@@ -80,18 +80,35 @@ public class ChessModel implements IChess {
     public List<ChessPosition> getPieceMoves(ChessPosition p) {
         //rendre robuste (check null par try catch)
         return chessBoard.getPiece(p).getMoves(p, chessBoard);
+
     }
 
     @Override
     public void movePiece(ChessPosition p0, ChessPosition p1) {
         chessBoard.movePiece(p0, p1);
-        return;
-
     }
 
     @Override
     public ChessKingState getKingState(ChessColor color) {
-        return null;
+        boolean isKingInDanger = false;
+
+        for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
+            for (int y = 0; y < IChess.BOARD_HEIGHT; y++) {
+                IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(x, y, chessBoard);
+                if (pos != null) { // if pos exists
+                    Piece pieceAtPos = chessBoard.getPiece(pos); // get piece
+                    if (pieceAtPos != null) { // if piece exists
+                        if (pieceAtPos.getPieceType() == ChessType.TYP_KING && pieceAtPos.getPieceColor() == color) {
+                            isKingInDanger = ChessUtils.canGetEaten(pos, chessBoard);
+
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return (isKingInDanger ? ChessKingState.KING_THREATEN : ChessKingState.KING_SAFE);
     }
 
     @Override
