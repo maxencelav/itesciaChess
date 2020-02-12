@@ -3,6 +3,7 @@ package fr.rphstudio.chess.game;
 import fr.rphstudio.chess.interf.EmptyCellException;
 import fr.rphstudio.chess.interf.IChess;
 import fr.rphstudio.chess.interf.OutOfBoardException;
+import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +96,7 @@ public class ChessModel implements IChess {
 
     @Override
     public List<ChessType> getRemovedPieces(ChessColor color) {
+
         return new ArrayList<ChessType>();
     }
 
@@ -105,6 +107,14 @@ public class ChessModel implements IChess {
 
     @Override
     public long getPlayerDuration(ChessColor color, boolean isPlaying) {
+
+        System.currentTimeMillis();
+
+        //Stocker heure début dans long avec time mili
+        //qd qqun joue, noter temps -> faire la diff pour avoir le temps du tour
+        //stocker dans une jauge/var correspondant au temps de jeu
+
+        // 3 infos : h dernier coup, jauge de tous les coups, calc depuis dernier coup
         return 0;
     }
 }
