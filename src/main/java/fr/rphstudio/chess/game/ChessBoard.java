@@ -78,6 +78,18 @@ public class ChessBoard {
             }
 
 
+        } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_KING && pieceToMove.getNumberOfTurns() == 0 && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_BLACK_PIECES) {
+            this.addPiece(pos1, pieceToMove);
+
+            if (pos1.x == 2) {
+                Piece rookToMove = this.removePiece(new IChess.ChessPosition(0, IChess.BOARD_POS_Y_BLACK_PIECES));
+                this.addPiece(new IChess.ChessPosition(3, IChess.BOARD_POS_Y_BLACK_PIECES), rookToMove);
+            } else if (pos1.x == 6) {
+                Piece rookToMove = this.removePiece(new IChess.ChessPosition(7, IChess.BOARD_POS_Y_BLACK_PIECES));
+                this.addPiece(new IChess.ChessPosition(5, IChess.BOARD_POS_Y_BLACK_PIECES), rookToMove);
+            }
+
+
         } else {
             this.addPiece(pos1, pieceToMove);
         }
