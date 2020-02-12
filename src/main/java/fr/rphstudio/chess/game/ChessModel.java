@@ -29,7 +29,7 @@ public class ChessModel implements IChess {
 
     @Override
     public void reinit() {
-        new ChessBoard();
+        this.chessBoard = new ChessBoard();
     }
 
     @Override
