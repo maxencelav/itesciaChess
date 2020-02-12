@@ -67,4 +67,14 @@ public class Piece {
         return (this.numberOfTurns > 0);
     }
 
+    private void setNumberOfTurns(int numberOfTurns) {
+        this.numberOfTurns = numberOfTurns;
+    }
+
+    public Piece clone() {
+        Piece clonedPiece = new Piece(this.pieceColor, this.pieceType);
+        clonedPiece.setNumberOfTurns(this.numberOfTurns);
+        return clonedPiece;
+    }
+
 }

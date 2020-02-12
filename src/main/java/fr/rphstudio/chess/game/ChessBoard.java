@@ -37,6 +37,19 @@ public class ChessBoard {
         }
     }
 
+    private ChessBoard(ChessBoard originalBoard) {
+        this.board = new Piece[IChess.BOARD_WIDTH][IChess.BOARD_HEIGHT];
+        for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
+            for (int y = 0; y < IChess.BOARD_HEIGHT; y++) {
+
+                Piece pieceToClone = originalBoard.board[x][y];
+                if (pieceToClone != null) {
+                    this.board[x][y] = pieceToClone.clone();
+                }
+            }
+        }
+    }
+
     public Piece getPiece(IChess.ChessPosition pos) {
         try {
             return board[pos.x][pos.y];
@@ -58,9 +71,6 @@ public class ChessBoard {
         return;
     }
 
-    public void testMove(IChess.ChessPosition p0, IChess.ChessPosition p1, IChess.ChessPosition piece0, IChess.ChessPosition piece1){
-
-    }
 
     public Piece movePiece(IChess.ChessPosition pos0, IChess.ChessPosition pos1) {
         Piece pieceToMove = this.removePiece(pos0);
@@ -101,6 +111,10 @@ public class ChessBoard {
 
 
         return removedPiece;
+    }
+
+    public ChessBoard clone() {
+        return new ChessBoard(this);
     }
 
 

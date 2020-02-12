@@ -79,13 +79,31 @@ public class ChessModel implements IChess {
     @Override
     public List<ChessPosition> getPieceMoves(ChessPosition p) {
         //rendre robuste (check null par try catch)
-        if(ChessUtils.isKingInDanger(chessBoard.getPiece(p).getPieceColor(), chessBoard)) {
-            //get all moves and only return ones that wont kill the king
+        if (ChessUtils.isKingInDanger(chessBoard.getPiece(p).getPieceColor(), chessBoard)) {
 
-            // OR
+            Piece currentPiece = chessBoard.getPiece(p);
 
-            // Check all movements of pieces.
-            // return only movement that won't get the king killed
+            List<ChessPosition> moveList = chessBoard.getPiece(p).getMoves(p, chessBoard);
+            List<ChessPosition> safeMoveList = new ArrayList<>();
+
+            System.out.println(p.x + " " + p.y);
+            System.out.println(currentPiece);
+
+
+            // get all moves and only return ones that wont kill the king
+            for (ChessPosition positionToCheck : moveList) {
+
+                ChessBoard clonedBoard = chessBoard.clone();
+
+                clonedBoard.movePiece(p, positionToCheck);
+
+                //if king is safe
+                if (!ChessUtils.isKingInDanger(currentPiece.getPieceColor(), clonedBoard)) {
+                    safeMoveList.add(positionToCheck); // add to list
+                }
+            }
+
+            return safeMoveList;
         }
 
         return chessBoard.getPiece(p).getMoves(p, chessBoard);
@@ -99,7 +117,6 @@ public class ChessModel implements IChess {
     @Override
     public ChessKingState getKingState(ChessColor color) {
         boolean isKingInDanger = ChessUtils.isKingInDanger(color, chessBoard);
-
         return (isKingInDanger ? ChessKingState.KING_THREATEN : ChessKingState.KING_SAFE);
     }
 
