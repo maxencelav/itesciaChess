@@ -132,7 +132,6 @@ public class ChessUtils {
                     if (pieceAtPos != null) { // if piece exists
                         if (pieceAtPos.getPieceType() == IChess.ChessType.TYP_KING && pieceAtPos.getPieceColor() == color) {
                             isKingInDanger = ChessUtils.canGetEaten(pos, chessBoard);
-
                         }
                     }
                 }

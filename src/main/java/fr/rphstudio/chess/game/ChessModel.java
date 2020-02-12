@@ -29,7 +29,7 @@ public class ChessModel implements IChess {
 
     @Override
     public void reinit() {
-
+        new ChessBoard();
     }
 
     @Override
@@ -78,17 +78,12 @@ public class ChessModel implements IChess {
 
     @Override
     public List<ChessPosition> getPieceMoves(ChessPosition p) {
-        //rendre robuste (check null par try catch)
-        if (ChessUtils.isKingInDanger(chessBoard.getPiece(p).getPieceColor(), chessBoard)) {
+        //rendre robuste (check null par try catch
 
             Piece currentPiece = chessBoard.getPiece(p);
 
             List<ChessPosition> moveList = chessBoard.getPiece(p).getMoves(p, chessBoard);
             List<ChessPosition> safeMoveList = new ArrayList<>();
-
-            System.out.println(p.x + " " + p.y);
-            System.out.println(currentPiece);
-
 
             // get all moves and only return ones that wont kill the king
             for (ChessPosition positionToCheck : moveList) {
@@ -104,9 +99,6 @@ public class ChessModel implements IChess {
             }
 
             return safeMoveList;
-        }
-
-        return chessBoard.getPiece(p).getMoves(p, chessBoard);
     }
 
     @Override
