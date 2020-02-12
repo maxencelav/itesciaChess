@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn implements IMove {
+
+    private boolean firstTurn = true;
+
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
