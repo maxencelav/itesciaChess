@@ -1,5 +1,6 @@
 package fr.rphstudio.chess.game;
 
+import fr.rphstudio.chess.game.pieces.Queen;
 import fr.rphstudio.chess.interf.IChess;
 
 public class ChessBoard {
@@ -61,8 +62,28 @@ public class ChessBoard {
         Piece pieceToMove = this.removePiece(pos0);
         Piece removedPiece = this.removePiece(pos1);
 
-        this.addPiece(pos1, pieceToMove);
+        if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_WHITE && pos1.y == IChess.BOARD_POS_Y_BLACK_PIECES) {
+            this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_WHITE, IChess.ChessType.TYP_QUEEN));
+        } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
+            this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_BLACK, IChess.ChessType.TYP_QUEEN));
+        } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_KING && pieceToMove.getNumberOfTurns() == 0 && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_WHITE && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
+            this.addPiece(pos1, pieceToMove);
+
+            if (pos1.x == 2) {
+                Piece rookToMove = this.removePiece(new IChess.ChessPosition(0, IChess.BOARD_POS_Y_WHITE_PIECES));
+                this.addPiece(new IChess.ChessPosition(3, IChess.BOARD_POS_Y_WHITE_PIECES), rookToMove);
+            } else if (pos1.x == 6) {
+                Piece rookToMove = this.removePiece(new IChess.ChessPosition(7, IChess.BOARD_POS_Y_WHITE_PIECES));
+                this.addPiece(new IChess.ChessPosition(5, IChess.BOARD_POS_Y_WHITE_PIECES), rookToMove);
+            }
+
+
+        } else {
+            this.addPiece(pos1, pieceToMove);
+        }
         pieceToMove.increaseNbTurns();
+
+
         return removedPiece;
     }
 
