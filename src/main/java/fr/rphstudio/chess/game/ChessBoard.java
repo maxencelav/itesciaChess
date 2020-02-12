@@ -58,6 +58,10 @@ public class ChessBoard {
         return;
     }
 
+    public void testMove(IChess.ChessPosition p0, IChess.ChessPosition p1, IChess.ChessPosition piece0, IChess.ChessPosition piece1){
+
+    }
+
     public Piece movePiece(IChess.ChessPosition pos0, IChess.ChessPosition pos1) {
         Piece pieceToMove = this.removePiece(pos0);
         Piece removedPiece = this.removePiece(pos1);

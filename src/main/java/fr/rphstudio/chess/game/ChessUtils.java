@@ -120,4 +120,26 @@ public class ChessUtils {
         }
         return positions;
     }
+
+    public static boolean isKingInDanger(IChess.ChessColor color, ChessBoard chessBoard) {
+        boolean isKingInDanger = false;
+
+        for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
+            for (int y = 0; y < IChess.BOARD_HEIGHT; y++) {
+                IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(x, y, chessBoard);
+                if (pos != null) { // if pos exists
+                    Piece pieceAtPos = chessBoard.getPiece(pos); // get piece
+                    if (pieceAtPos != null) { // if piece exists
+                        if (pieceAtPos.getPieceType() == IChess.ChessType.TYP_KING && pieceAtPos.getPieceColor() == color) {
+                            isKingInDanger = ChessUtils.canGetEaten(pos, chessBoard);
+
+                        }
+                    }
+                }
+
+            }
+        }
+
+        return isKingInDanger;
+    }
 }

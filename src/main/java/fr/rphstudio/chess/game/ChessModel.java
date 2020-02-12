@@ -79,8 +79,16 @@ public class ChessModel implements IChess {
     @Override
     public List<ChessPosition> getPieceMoves(ChessPosition p) {
         //rendre robuste (check null par try catch)
-        return chessBoard.getPiece(p).getMoves(p, chessBoard);
+        if(ChessUtils.isKingInDanger(chessBoard.getPiece(p).getPieceColor(), chessBoard)) {
+            //get all moves and only return ones that wont kill the king
 
+            // OR
+
+            // Check all movements of pieces.
+            // return only movement that won't get the king killed
+        }
+
+        return chessBoard.getPiece(p).getMoves(p, chessBoard);
     }
 
     @Override
@@ -90,23 +98,7 @@ public class ChessModel implements IChess {
 
     @Override
     public ChessKingState getKingState(ChessColor color) {
-        boolean isKingInDanger = false;
-
-        for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
-            for (int y = 0; y < IChess.BOARD_HEIGHT; y++) {
-                IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(x, y, chessBoard);
-                if (pos != null) { // if pos exists
-                    Piece pieceAtPos = chessBoard.getPiece(pos); // get piece
-                    if (pieceAtPos != null) { // if piece exists
-                        if (pieceAtPos.getPieceType() == ChessType.TYP_KING && pieceAtPos.getPieceColor() == color) {
-                            isKingInDanger = ChessUtils.canGetEaten(pos, chessBoard);
-
-                        }
-                    }
-                }
-
-            }
-        }
+        boolean isKingInDanger = ChessUtils.isKingInDanger(color, chessBoard);
 
         return (isKingInDanger ? ChessKingState.KING_THREATEN : ChessKingState.KING_SAFE);
     }
