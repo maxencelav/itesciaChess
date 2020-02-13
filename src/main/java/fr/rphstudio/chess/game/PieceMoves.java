@@ -15,6 +15,13 @@ public class PieceMoves {
 
     }
 
+    public void reset(long roundTime, IChess.ChessColor playerColor) {
+
+        moves = new ArrayList<>();
+
+
+    }
+
     public void addMove(ChessBoard savedBoard, long roundTime, IChess.ChessColor playerColor) {
         moves.add(new Move(savedBoard, roundTime, playerColor));
     }

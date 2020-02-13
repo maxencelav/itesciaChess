@@ -19,7 +19,6 @@ public class ChessModel implements IChess {
         chessBoard = new ChessBoard();
         timer = new TimeManager();
         pieceMoves = new PieceMoves(chessBoard, 0, ChessColor.CLR_WHITE);
-
     }
 
     /**
@@ -36,6 +35,7 @@ public class ChessModel implements IChess {
     public void reinit() {
         this.chessBoard = new ChessBoard();
         this.timer.resetTimer();
+        this.pieceMoves = new PieceMoves(chessBoard, 0, ChessColor.CLR_WHITE);
     }
 
     @Override
