@@ -11,10 +11,13 @@ import java.util.List;
 public class ChessModel implements IChess {
 
     private ChessBoard chessBoard;
+    private TimeManager timer;
+
 
     private ChessModel() {
 
         chessBoard = new ChessBoard();
+        timer = new TimeManager();
     }
 
     /**
@@ -30,6 +33,7 @@ public class ChessModel implements IChess {
     @Override
     public void reinit() {
         this.chessBoard = new ChessBoard();
+        this.timer.resetTimer();
     }
 
     @Override
@@ -104,9 +108,12 @@ public class ChessModel implements IChess {
     @Override
     public void movePiece(ChessPosition p0, ChessPosition p1) {
         Piece removedPiece = chessBoard.movePiece(p0, p1);
-        if (removedPiece != null){ // if a piece was removed
-            chessBoard.addRemovedPiece(removedPiece.getPieceType(),removedPiece.getPieceColor());
+        if (removedPiece != null) { // if a piece was removed
+            chessBoard.addRemovedPiece(removedPiece.getPieceType(), removedPiece.getPieceColor());
+
         }
+        timer.changeTurn(chessBoard.getPiece(p1).getPieceColor());
+
     }
 
     @Override
@@ -128,13 +135,12 @@ public class ChessModel implements IChess {
     @Override
     public long getPlayerDuration(ChessColor color, boolean isPlaying) {
 
-        System.currentTimeMillis();
-
         //Stocker heure début dans long avec time mili
         //qd qqun joue, noter temps -> faire la diff pour avoir le temps du tour
         //stocker dans une jauge/var correspondant au temps de jeu
 
         // 3 infos : h dernier coup, jauge de tous les coups, calc depuis dernier coup
-        return 0;
+
+        return timer.getPlayerTime(color, isPlaying);
     }
 }
