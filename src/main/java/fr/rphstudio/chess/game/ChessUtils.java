@@ -142,6 +142,7 @@ public class ChessUtils {
 
     /**
      * Gets all the positions that could get "eaten" by the opposite color
+     *
      * @param color Color that could get eaten
      * @param board Board where the pieces are
      * @return List of all the ChessPosition that are at risk for the given color
@@ -166,7 +167,7 @@ public class ChessUtils {
     /**
      * Returns a boolean if the King is in danger
      *
-     * @param color Color of the King to check
+     * @param color      Color of the King to check
      * @param chessBoard Board where the King is
      * @return true if the King is in danger, false if not
      */
@@ -185,7 +186,6 @@ public class ChessUtils {
                         }
                     }
                 }
-
             }
         }
 
