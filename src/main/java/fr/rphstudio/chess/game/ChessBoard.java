@@ -13,7 +13,9 @@ public class ChessBoard {
     private List<IChess.ChessType> removedBlackPieces = new ArrayList<IChess.ChessType>();
     private PieceMoves moveList = new PieceMoves();
 
-
+    /**
+     * Constructor for the board with the basic piece position for a game of chess
+     */
     public ChessBoard() {
 
         this.board = new Piece[IChess.BOARD_WIDTH][IChess.BOARD_HEIGHT];
@@ -44,6 +46,11 @@ public class ChessBoard {
         }
     }
 
+    /**
+     * Creates an identical board (clone) based off the one given as a parameter
+     * @param originalBoard Board to "clone"
+     */
+
     private ChessBoard(ChessBoard originalBoard) {
         this.board = new Piece[IChess.BOARD_WIDTH][IChess.BOARD_HEIGHT];
         for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
@@ -57,6 +64,12 @@ public class ChessBoard {
         }
     }
 
+    /**
+     *
+     * @param pos ChessPosition of the piece you want
+     * @return the Piece at the given pos
+     */
+
     public Piece getPiece(IChess.ChessPosition pos) {
         try {
             return board[pos.x][pos.y];
@@ -67,27 +80,50 @@ public class ChessBoard {
         }
     }
 
+    /**
+     * Removes a piece from the board
+     * @param pos Position of the piece you want to remove
+     * @return Removed piece
+     */
+
     public Piece removePiece(IChess.ChessPosition pos) {
         Piece removedPiece = this.board[pos.x][pos.y];
         this.board[pos.x][pos.y] = null;
         return removedPiece;
     }
 
+    /**
+     * Adds a piece to the board
+     * @param pos Position of the piece you want to add
+     * @param chessPiece Piece to add
+     */
+
     public void addPiece(IChess.ChessPosition pos, Piece chessPiece) {
         this.board[pos.x][pos.y] = chessPiece;
     }
 
-
+    /**
+     * Moves the piece and makes special movements (roque, transformation of the pawn into a queen)
+     * @param pos0 Starting position
+     * @param pos1 End position
+     * @return Removed piece
+     */
     public Piece movePiece(IChess.ChessPosition pos0, IChess.ChessPosition pos1) {
         Piece pieceToMove = this.removePiece(pos0);
         Piece removedPiece = this.removePiece(pos1);
 
+        //transformation of the pawn into a queen
+        
         if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_WHITE && pos1.y == IChess.BOARD_POS_Y_BLACK_PIECES) {
             this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_WHITE, IChess.ChessType.TYP_QUEEN));
         } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
             this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_BLACK, IChess.ChessType.TYP_QUEEN));
+
+            //the roque white side
+
         } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_KING && pieceToMove.getNumberOfTurns() == 0 && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_WHITE && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
             this.addPiece(pos1, pieceToMove);
+
 
             if (pos1.x == 2) {
                 Piece rookToMove = this.removePiece(new IChess.ChessPosition(0, IChess.BOARD_POS_Y_WHITE_PIECES));
@@ -97,9 +133,11 @@ public class ChessBoard {
                 this.addPiece(new IChess.ChessPosition(5, IChess.BOARD_POS_Y_WHITE_PIECES), rookToMove);
             }
 
+            //the roque black side
 
         } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_KING && pieceToMove.getNumberOfTurns() == 0 && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_BLACK_PIECES) {
             this.addPiece(pos1, pieceToMove);
+
 
             if (pos1.x == 2) {
                 Piece rookToMove = this.removePiece(new IChess.ChessPosition(0, IChess.BOARD_POS_Y_BLACK_PIECES));
