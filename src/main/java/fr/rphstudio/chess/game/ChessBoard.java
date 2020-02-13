@@ -70,7 +70,7 @@ public class ChessBoard {
             this.removedWhitePieces.add(piece);
         }
 
-        this.moveList = originalBoard.moveList;
+        //this.moveList = originalBoard.moveList;
     }
 
     /**

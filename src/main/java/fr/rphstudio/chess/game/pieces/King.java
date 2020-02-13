@@ -30,7 +30,9 @@ public class King implements IMove {
                         board.getPiece(new IChess.ChessPosition(2, kingLine)) == null &&
                         board.getPiece(new IChess.ChessPosition(3, kingLine)) == null) {
                     positions.add(new IChess.ChessPosition(2, kingLine));
-                } else if (board.getPiece(new IChess.ChessPosition(0, kingLine)).getPieceType() == IChess.ChessType.TYP_ROOK &&
+                }
+
+                if (board.getPiece(new IChess.ChessPosition(0, kingLine)).getPieceType() == IChess.ChessType.TYP_ROOK &&
                         board.getPiece(new IChess.ChessPosition(5, kingLine)) == null &&
                         board.getPiece(new IChess.ChessPosition(6, kingLine)) == null) {
                     positions.add(new IChess.ChessPosition(6, kingLine));
