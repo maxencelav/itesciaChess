@@ -21,18 +21,20 @@ public class Knight implements IMove {
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
 
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
-
+        // possible moves for the piece in position X
         int[] posX = {p.x + 1, p.x + 1, p.x + 2, p.x + 2, p.x - 1, p.x - 1, p.x - 2, p.x - 2};
+        // possible moves for the piece in position Y
         int[] posY = {p.y - 2, p.y + 2, p.y - 1, p.y + 1, p.y - 2, p.y + 2, p.y - 1, p.y + 1};
 
         for (int i = 0; i < posX.length; i++) {
-            IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(posX[i], posY[i], board);
-            if (pos != null) {
-                Piece pieceAtPos = board.getPiece(pos);
-                if (pieceAtPos == null) {
-                    possibleMoves.add(pos);
-                } else if (pieceAtPos.getPieceColor() != board.getPiece(p).getPieceColor()) {
-                    possibleMoves.add(pos);
+            // check the position on the board with possible moves
+            IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(posX[i], posY[i]);
+            if (pos != null) { // if position is different of null
+                Piece pieceAtPos = board.getPiece(pos); // get piece in this position
+                if (pieceAtPos == null) { // if position is empty
+                    possibleMoves.add(pos); // add this position on the list of possible moves
+                } else if (pieceAtPos.getPieceColor() != board.getPiece(p).getPieceColor()) { // if this piece had different color of enemy piece
+                    possibleMoves.add(pos); // add this position on the list of possible moves
                 }
 
             }

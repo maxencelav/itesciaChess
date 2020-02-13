@@ -6,19 +6,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChessUtils {
-    public static IChess.ChessPosition checkPositionOnBoard(int x, int y, ChessBoard board) {
+    /**
+     * Returns a ChessPosition if the position can exist on the board
+     * @param x position column in the board
+     * @param y position row in the board
+     * @return Given coordinates as a ChessPosition or null if the position is out of bounds
+     */
+    public static IChess.ChessPosition checkPositionOnBoard(int x, int y) {
         IChess.ChessPosition dest = new IChess.ChessPosition(x, y);
-        if (x >= 0 && x < 8 && y >= 0 && y < 8) {
+        if (x >= 0 && x < IChess.BOARD_WIDTH && y >= 0 && y < IChess.BOARD_HEIGHT) {
             return dest;
         }
         return null;
     }
 
+    /**
+     *
+     * @param dX
+     * @param dY
+     * @param p
+     * @param board
+     * @param size
+     * @return
+     */
     public static List<IChess.ChessPosition> getMovesDirection(int dX, int dY, IChess.ChessPosition p, ChessBoard board, int size) {
         List<IChess.ChessPosition> possibleMoves = new ArrayList<IChess.ChessPosition>();
 
         for (int dist = 1; dist <= size; dist++) {
-            IChess.ChessPosition pos = checkPositionOnBoard(p.x + (dist * dX), p.y + (dist * dY), board);
+            IChess.ChessPosition pos = checkPositionOnBoard(p.x + (dist * dX), p.y + (dist * dY));
 
 
             if (pos != null) {
@@ -39,6 +54,13 @@ public class ChessUtils {
         return possibleMoves;
     }
 
+    /**
+     * Returns possible moves in diagonal on the board
+     * @param p Position of the piece on the board
+     * @param board
+     * @param size Number of look for each case
+     * @return List with the possible moves in diagonal
+     */
     public static List<IChess.ChessPosition> getMoveDiagonal(IChess.ChessPosition p, ChessBoard board, int size) {
         List<IChess.ChessPosition> tempList = new ArrayList<>();
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
@@ -60,6 +82,13 @@ public class ChessUtils {
 
     }
 
+    /**
+     * Returns possible moves in orthogonal on the board
+     * @param p Position of the piece on the board
+     * @param board
+     * @param size Number of look for each case
+     * @return List with the possible moves in orthogonal
+     */
     public static List<IChess.ChessPosition> getMoveOrthogonal(IChess.ChessPosition p, ChessBoard board, int size) {
         List<IChess.ChessPosition> tempList = new ArrayList<>();
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
@@ -81,6 +110,12 @@ public class ChessUtils {
 
     }
 
+    /**
+     * Returns a boolean if the piece it can be eaten
+     * @param pos
+     * @param board
+     * @return
+     */
     public static boolean canGetEaten(IChess.ChessPosition pos, ChessBoard board) {
         ArrayList<IChess.ChessPosition> positions;
 
@@ -109,7 +144,7 @@ public class ChessUtils {
 
         for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
             for (int y = 0; y < IChess.BOARD_HEIGHT; y++) {
-                IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(x, y, board);
+                IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(x, y);
                 if (pos != null) { // if pos exists
                     Piece pieceAtPos = board.getPiece(pos); // get piece
                     if (pieceAtPos != null && pieceAtPos.getPieceColor() != color) { // if piece exists
@@ -121,12 +156,18 @@ public class ChessUtils {
         return positions;
     }
 
+    /**
+     * Returns a boolean if the King is in danger 
+     * @param color
+     * @param chessBoard
+     * @return
+     */
     public static boolean isKingInDanger(IChess.ChessColor color, ChessBoard chessBoard) {
         boolean isKingInDanger = false;
 
         for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
             for (int y = 0; y < IChess.BOARD_HEIGHT; y++) {
-                IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(x, y, chessBoard);
+                IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(x, y);
                 if (pos != null) { // if pos exists
                     Piece pieceAtPos = chessBoard.getPiece(pos); // get piece
                     if (pieceAtPos != null) { // if piece exists

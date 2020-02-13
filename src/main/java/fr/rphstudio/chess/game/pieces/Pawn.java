@@ -33,7 +33,7 @@ public class Pawn implements IMove {
 
 
         for (int dist = 1; dist <= size; dist++) {
-            IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(p.x, p.y + (dist * dY), board);
+            IChess.ChessPosition pos = ChessUtils.checkPositionOnBoard(p.x, p.y + (dist * dY));
 
             if (pos != null) { // if position exists on the board
                 Piece pieceAtPos = board.getPiece(pos);
@@ -48,7 +48,7 @@ public class Pawn implements IMove {
 
         // check two front pieces diagonally
         for (int dX = -1; dX <= 1; dX += 2) {
-            IChess.ChessPosition frontPos = ChessUtils.checkPositionOnBoard(p.x + (dX), p.y + (1 * dY), board);
+            IChess.ChessPosition frontPos = ChessUtils.checkPositionOnBoard(p.x + (dX), p.y + (1 * dY));
 
             if (frontPos != null) { // if pos exists
                 Piece pieceAtPos = board.getPiece(frontPos);
