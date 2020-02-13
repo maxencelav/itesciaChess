@@ -11,8 +11,12 @@ import java.util.List;
 
 public class Pawn implements IMove {
 
-    private boolean firstTurn = true;
-
+    /**
+     * Gets possible moves for the Pawn piece
+     * @param p position of the piece on the board
+     * @param board where the piece is located
+     * @return list of possible positions for the piece
+     */
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
         List<IChess.ChessPosition> possibleMoves = new ArrayList<>();
