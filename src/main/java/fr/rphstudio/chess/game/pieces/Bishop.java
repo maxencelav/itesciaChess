@@ -9,6 +9,12 @@ import java.util.List;
 
 public class Bishop implements IMove {
 
+    /**
+     * Gets possible moves for the Bishop piece
+     * @param p position of the piece on the board
+     * @param board where the piece is located
+     * @return list of possible positions for the piece
+     */
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
         return ChessUtils.getMoveDiagonal(p, board, IChess.BOARD_WIDTH);

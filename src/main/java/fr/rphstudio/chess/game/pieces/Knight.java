@@ -11,9 +11,12 @@ import java.util.List;
 
 public class Knight implements IMove {
 
-    public Knight() {
-    }
-
+    /**
+     * Gets possible moves for the Knight piece
+     * @param p position of the piece on the board
+     * @param board where the piece is located
+     * @return list of possible positions for the piece
+     */
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
 

@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class King implements IMove {
-
+    /**
+     * Gets possible moves for the King piece
+     * @param p position of the piece on the board
+     * @param board where the piece is located
+     * @return list of the possible positions for the piece
+     */
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
         List<IChess.ChessPosition> positions = new ArrayList<>();
