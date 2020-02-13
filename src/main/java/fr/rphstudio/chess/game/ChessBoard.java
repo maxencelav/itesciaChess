@@ -11,7 +11,7 @@ public class ChessBoard {
     private Piece[][] board;
     private List<IChess.ChessType> removedWhitePieces = new ArrayList<IChess.ChessType>();
     private List<IChess.ChessType> removedBlackPieces = new ArrayList<IChess.ChessType>();
-    private PieceMoves moveList;
+    //private PieceMoves moveList;
 
     /**
      * Constructor for the board with the basic piece position for a game of chess
@@ -44,10 +44,14 @@ public class ChessBoard {
             this.board[pawnX][IChess.BOARD_POS_Y_BLACK_PAWNS] = new Piece(IChess.ChessColor.CLR_BLACK, IChess.ChessType.TYP_PAWN);
             this.board[pawnX][IChess.BOARD_POS_Y_WHITE_PAWNS] = new Piece(IChess.ChessColor.CLR_WHITE, IChess.ChessType.TYP_PAWN);
         }
+
+        //this.moveList = new PieceMoves(0, IChess.ChessColor.CLR_WHITE);
+
     }
 
     /**
      * Creates an identical board (clone) based off the one given as a parameter
+     *
      * @param originalBoard Board to "clone"
      */
 
@@ -63,18 +67,17 @@ public class ChessBoard {
             }
         }
 
-        for (IChess.ChessType piece : originalBoard.removedBlackPieces){
+        for (IChess.ChessType piece : originalBoard.removedBlackPieces) {
             this.removedBlackPieces.add(piece);
         }
-        for (IChess.ChessType piece : originalBoard.removedWhitePieces){
+        for (IChess.ChessType piece : originalBoard.removedWhitePieces) {
             this.removedWhitePieces.add(piece);
         }
 
-        this.moveList = originalBoard.moveList;
+        //this.moveList = originalBoard.moveList;
     }
 
     /**
-     *
      * @param pos ChessPosition of the piece you want
      * @return the Piece at the given pos
      */
@@ -91,6 +94,7 @@ public class ChessBoard {
 
     /**
      * Removes a piece from the board
+     *
      * @param pos Position of the piece you want to remove
      * @return Removed piece
      */
@@ -103,7 +107,8 @@ public class ChessBoard {
 
     /**
      * Adds a piece to the board
-     * @param pos Position of the piece you want to add
+     *
+     * @param pos        Position of the piece you want to add
      * @param chessPiece Piece to add
      */
 
@@ -113,6 +118,7 @@ public class ChessBoard {
 
     /**
      * Moves the piece and makes special movements (roque, transformation of the pawn into a queen)
+     *
      * @param pos0 Starting position
      * @param pos1 End position
      * @return Removed piece
@@ -168,6 +174,7 @@ public class ChessBoard {
 
     /**
      * Clones the board
+     *
      * @return the clone board
      */
     public ChessBoard clone() {
@@ -176,6 +183,7 @@ public class ChessBoard {
 
     /**
      * Get the types of the pieces that are gone from the board
+     *
      * @param color Color of the pieces removed
      * @return List of the types of pieces removed
      */
@@ -192,8 +200,9 @@ public class ChessBoard {
     }
 
     /**
-     * add pieces to the list of removed pieces 
-     * @param type type of the pieces removed
+     * add pieces to the list of removed pieces
+     *
+     * @param type  type of the pieces removed
      * @param color color of the pieces removed
      */
     public void addRemovedPiece(IChess.ChessType type, IChess.ChessColor color) {
@@ -203,7 +212,7 @@ public class ChessBoard {
                 break;
             case CLR_BLACK:
                 removedBlackPieces.add(type);
-            break;
+                break;
         }
     }
 
