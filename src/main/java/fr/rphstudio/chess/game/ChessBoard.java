@@ -113,7 +113,7 @@ public class ChessBoard {
         Piece removedPiece = this.removePiece(pos1);
 
         //transformation of the pawn into a queen
-        
+
         if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_WHITE && pos1.y == IChess.BOARD_POS_Y_BLACK_PIECES) {
             this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_WHITE, IChess.ChessType.TYP_QUEEN));
         } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
@@ -157,10 +157,19 @@ public class ChessBoard {
         return removedPiece;
     }
 
+    /**
+     * Clones the board
+     * @return the clone board
+     */
     public ChessBoard clone() {
         return new ChessBoard(this);
     }
 
+    /**
+     * Get the types of the pieces that are gone from the board
+     * @param color Color of the pieces removed
+     * @return List of the types of pieces removed
+     */
     public List<IChess.ChessType> getRemovedPieces(IChess.ChessColor color) {
         switch (color) {
             case CLR_WHITE:
@@ -173,6 +182,11 @@ public class ChessBoard {
         return null;
     }
 
+    /**
+     * add pieces to the list of removed pieces 
+     * @param type type of the pieces removed
+     * @param color color of the pieces removed
+     */
     public void addRemovedPiece(IChess.ChessType type, IChess.ChessColor color) {
         switch (color) {
             case CLR_WHITE:
