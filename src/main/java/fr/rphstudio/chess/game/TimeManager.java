@@ -42,16 +42,23 @@ public class TimeManager {
                 break;
         }
 
+        // if it's the player's turn
         if (isPlaying) {
-            time += getCurrentTime();
+            time += getCurrentTime(); // add the current move/round time to the returned time
         }
 
         return time;
     }
 
+    /**
+     * Decreases time for a given player
+     *
+     * @param color        Player color
+     * @param timeToRemove Time in milliseconds to remove
+     */
     public void decreaseTime(IChess.ChessColor color, long timeToRemove) {
 
-        switch (color) {
+        switch (color) { // Removes time from the corresponding player counter
             case CLR_WHITE:
                 timeWhite -= timeToRemove;
                 break;
@@ -70,7 +77,7 @@ public class TimeManager {
      */
     public long changeTurn(IChess.ChessColor color) {
         long turnTime = getCurrentTime();
-        switch (color) {
+        switch (color) { // adds the turn time to the corresponding player counter
             case CLR_WHITE:
                 timeWhite += turnTime;
                 break;
@@ -79,7 +86,7 @@ public class TimeManager {
                 break;
         }
 
-        startNewTimer();
+        startNewTimer(); // start a new turn/move
         return turnTime;
     }
 
