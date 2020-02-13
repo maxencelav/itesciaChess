@@ -11,7 +11,6 @@ public class ChessBoard {
     private Piece[][] board;
     private List<IChess.ChessType> removedWhitePieces = new ArrayList<IChess.ChessType>();
     private List<IChess.ChessType> removedBlackPieces = new ArrayList<IChess.ChessType>();
-    //private PieceMoves moveList;
 
     /**
      * Constructor for the board with the basic piece position for a game of chess
@@ -19,16 +18,21 @@ public class ChessBoard {
     public ChessBoard() {
 
         this.board = new Piece[IChess.BOARD_WIDTH][IChess.BOARD_HEIGHT];
+        //creates a 2D array to contain the pieces
+
+        // for each that starts from the black pieces line (0) and goes directly to the white pieces line (8)
         for (int line = IChess.BOARD_POS_Y_BLACK_PIECES; line <= IChess.BOARD_POS_Y_WHITE_PIECES; line += IChess.BOARD_POS_Y_WHITE_PIECES) {
+
             IChess.ChessColor pieceColor;
             switch (line) {
-                case IChess.BOARD_POS_Y_BLACK_PIECES:
-                    pieceColor = IChess.ChessColor.CLR_BLACK;
+                case IChess.BOARD_POS_Y_BLACK_PIECES: // if black line
+                    pieceColor = IChess.ChessColor.CLR_BLACK; // black pieces
                     break;
-                default:
-                    pieceColor = IChess.ChessColor.CLR_WHITE;
+                default: // default (if on white line)
+                    pieceColor = IChess.ChessColor.CLR_WHITE; // white pieces
                     break;
             }
+            // tldr: sets the piece color depending on the line number
 
             this.board[IChess.BOARD_POS_X_QUEENSIDE_ROOK][line] = new Piece(pieceColor, IChess.ChessType.TYP_ROOK);
             this.board[IChess.BOARD_POS_X_QUEENSIDE_KNIGHT][line] = new Piece(pieceColor, IChess.ChessType.TYP_KNIGHT);
@@ -38,14 +42,16 @@ public class ChessBoard {
             this.board[IChess.BOARD_POS_X_KINGSIDE_BISHOP][line] = new Piece(pieceColor, IChess.ChessType.TYP_BISHOP);
             this.board[IChess.BOARD_POS_X_KINGSIDE_KNIGHT][line] = new Piece(pieceColor, IChess.ChessType.TYP_KNIGHT);
             this.board[IChess.BOARD_POS_X_KINGSIDE_ROOK][line] = new Piece(pieceColor, IChess.ChessType.TYP_ROOK);
+
+            //adds all the special pieces
         }
 
-        for (int pawnX = 0; pawnX < IChess.BOARD_WIDTH; pawnX++) {
+        // adds a full line of pawns for both colors
+        for (int pawnX = 0; pawnX < IChess.BOARD_WIDTH; pawnX++) { // from 0 to the full board lenghth
             this.board[pawnX][IChess.BOARD_POS_Y_BLACK_PAWNS] = new Piece(IChess.ChessColor.CLR_BLACK, IChess.ChessType.TYP_PAWN);
             this.board[pawnX][IChess.BOARD_POS_Y_WHITE_PAWNS] = new Piece(IChess.ChessColor.CLR_WHITE, IChess.ChessType.TYP_PAWN);
+            //adds a black and a white pawn on their respective line
         }
-
-        //this.moveList = new PieceMoves(0, IChess.ChessColor.CLR_WHITE);
 
     }
 
@@ -58,15 +64,16 @@ public class ChessBoard {
     private ChessBoard(ChessBoard originalBoard) {
         this.board = new Piece[IChess.BOARD_WIDTH][IChess.BOARD_HEIGHT];
         for (int x = 0; x < IChess.BOARD_WIDTH; x++) {
-            for (int y = 0; y < IChess.BOARD_HEIGHT; y++) {
+            for (int y = 0; y < IChess.BOARD_HEIGHT; y++) { // for all pieces of the og board
 
-                Piece pieceToClone = originalBoard.board[x][y];
-                if (pieceToClone != null) {
-                    this.board[x][y] = pieceToClone.clone();
+                Piece pieceToClone = originalBoard.board[x][y]; // gets the piece from the og board
+                if (pieceToClone != null) { // if piece exists
+                    this.board[x][y] = pieceToClone.clone(); // clone the piece to the new board
                 }
             }
         }
 
+        // grabs all the removed pieces of the og board
         for (IChess.ChessType piece : originalBoard.removedBlackPieces) {
             this.removedBlackPieces.add(piece);
         }
@@ -74,7 +81,6 @@ public class ChessBoard {
             this.removedWhitePieces.add(piece);
         }
 
-        //this.moveList = originalBoard.moveList;
     }
 
     /**
@@ -87,7 +93,6 @@ public class ChessBoard {
             return board[pos.x][pos.y];
 
         } catch (Exception e) {
-            //System.out.println(e);
             return null;
         }
     }
@@ -100,9 +105,9 @@ public class ChessBoard {
      */
 
     public Piece removePiece(IChess.ChessPosition pos) {
-        Piece removedPiece = this.board[pos.x][pos.y];
-        this.board[pos.x][pos.y] = null;
-        return removedPiece;
+        Piece removedPiece = this.board[pos.x][pos.y]; // gets the piece from the board
+        this.board[pos.x][pos.y] = null; // sets it to null
+        return removedPiece; // returns the piece
     }
 
     /**
@@ -127,45 +132,55 @@ public class ChessBoard {
         Piece pieceToMove = this.removePiece(pos0);
         Piece removedPiece = this.removePiece(pos1);
 
-        //transformation of the pawn into a queen
-
+        //transformation of the white pawn into a queen
         if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_WHITE && pos1.y == IChess.BOARD_POS_Y_BLACK_PIECES) {
-            this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_WHITE, IChess.ChessType.TYP_QUEEN));
-        } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
-            this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_BLACK, IChess.ChessType.TYP_QUEEN));
+            // if piece is a pawn, if the pawn is white, if the pawn is in the black pieces line
+            this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_WHITE, IChess.ChessType.TYP_QUEEN)); // turn into queen
+        }
 
-            //the roque white side
+        //transformation of the black pawn into a queen
+        else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_PAWN && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
+            // if piece is a pawn, if the pawn is black, if the pawn is in the white pieces line
+            this.addPiece(pos1, new Piece(IChess.ChessColor.CLR_BLACK, IChess.ChessType.TYP_QUEEN)); // turn into queen
+        }
 
-        } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_KING && pieceToMove.getNumberOfTurns() == 0 && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_WHITE && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
+        // roque white side
+        else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_KING && pieceToMove.getNumberOfTurns() == 0 && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_WHITE && pos1.y == IChess.BOARD_POS_Y_WHITE_PIECES) {
+            // if piece is a king, if first turn, if the pawn is white, if the pawn is in the white pieces line
+
             this.addPiece(pos1, pieceToMove);
 
-
-            if (pos1.x == 2) {
+            if (pos1.x == 2) { // if king goes to the left <- roque
                 Piece rookToMove = this.removePiece(new IChess.ChessPosition(0, IChess.BOARD_POS_Y_WHITE_PIECES));
                 this.addPiece(new IChess.ChessPosition(3, IChess.BOARD_POS_Y_WHITE_PIECES), rookToMove);
-            } else if (pos1.x == 6) {
+            } else if (pos1.x == 6) { // if king goes to the right -> roque
                 Piece rookToMove = this.removePiece(new IChess.ChessPosition(7, IChess.BOARD_POS_Y_WHITE_PIECES));
                 this.addPiece(new IChess.ChessPosition(5, IChess.BOARD_POS_Y_WHITE_PIECES), rookToMove);
             }
 
-            //the roque black side
+        }
 
-        } else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_KING && pieceToMove.getNumberOfTurns() == 0 && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_BLACK_PIECES) {
+        // roque black side
+        else if (pieceToMove.getPieceType() == IChess.ChessType.TYP_KING && pieceToMove.getNumberOfTurns() == 0 && pieceToMove.getPieceColor() == IChess.ChessColor.CLR_BLACK && pos1.y == IChess.BOARD_POS_Y_BLACK_PIECES) {
+            // if piece is a king, if first turn, if the pawn is black, if the pawn is in the black pieces line
+
             this.addPiece(pos1, pieceToMove);
 
-
-            if (pos1.x == 2) {
+            if (pos1.x == 2) { // if king goes to the left <- roque
                 Piece rookToMove = this.removePiece(new IChess.ChessPosition(0, IChess.BOARD_POS_Y_BLACK_PIECES));
                 this.addPiece(new IChess.ChessPosition(3, IChess.BOARD_POS_Y_BLACK_PIECES), rookToMove);
-            } else if (pos1.x == 6) {
+            } else if (pos1.x == 6) { // if king goes to the right -> roque
                 Piece rookToMove = this.removePiece(new IChess.ChessPosition(7, IChess.BOARD_POS_Y_BLACK_PIECES));
                 this.addPiece(new IChess.ChessPosition(5, IChess.BOARD_POS_Y_BLACK_PIECES), rookToMove);
             }
 
+        }
 
-        } else {
+        // normal movement
+        else {
             this.addPiece(pos1, pieceToMove);
         }
+
         pieceToMove.increaseNbTurns();
 
 

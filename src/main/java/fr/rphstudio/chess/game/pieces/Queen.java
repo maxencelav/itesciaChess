@@ -21,6 +21,8 @@ public class Queen implements IMove {
 
         positions.addAll(ChessUtils.getMoveDiagonal(p, board, IChess.BOARD_WIDTH));
         positions.addAll(ChessUtils.getMoveOrthogonal(p, board, IChess.BOARD_WIDTH));
+        // get all the positions diagonally and orthogonally, and add them to the list
+        // the positions go the the edge of the board, for maximum reach
 
         return positions;
     }

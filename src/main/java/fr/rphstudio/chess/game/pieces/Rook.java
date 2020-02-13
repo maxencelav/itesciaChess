@@ -17,5 +17,8 @@ public class Rook implements IMove {
     @Override
     public List<IChess.ChessPosition> getPossibleMoves(IChess.ChessPosition p, ChessBoard board) {
         return ChessUtils.getMoveOrthogonal(p, board, IChess.BOARD_WIDTH);
+        // get all the positions orthogonally, and add them to the list
+        // the positions go the the edge of the board, for maximum reach
+
     }
 }
