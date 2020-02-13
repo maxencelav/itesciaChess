@@ -3,9 +3,15 @@ package fr.rphstudio.chess.game;
 import fr.rphstudio.chess.game.pieces.Queen;
 import fr.rphstudio.chess.interf.IChess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChessBoard {
 
     private Piece[][] board;
+    private List<IChess.ChessType> removedWhitePieces = new ArrayList<IChess.ChessType>();
+    private List<IChess.ChessType> removedBlackPieces = new ArrayList<IChess.ChessType>();
+
 
     public ChessBoard() {
 
@@ -68,7 +74,6 @@ public class ChessBoard {
 
     public void addPiece(IChess.ChessPosition pos, Piece chessPiece) {
         this.board[pos.x][pos.y] = chessPiece;
-        return;
     }
 
 
@@ -115,6 +120,29 @@ public class ChessBoard {
 
     public ChessBoard clone() {
         return new ChessBoard(this);
+    }
+
+    public List<IChess.ChessType> getRemovedPieces(IChess.ChessColor color) {
+        switch (color) {
+            case CLR_WHITE:
+                return removedWhitePieces;
+
+            case CLR_BLACK:
+                return removedBlackPieces;
+        }
+
+        return null;
+    }
+
+    public void addRemovedPiece(IChess.ChessType type, IChess.ChessColor color) {
+        switch (color) {
+            case CLR_WHITE:
+                removedWhitePieces.add(type);
+                break;
+            case CLR_BLACK:
+                removedBlackPieces.add(type);
+            break;
+        }
     }
 
 

@@ -80,30 +80,33 @@ public class ChessModel implements IChess {
     public List<ChessPosition> getPieceMoves(ChessPosition p) {
         //rendre robuste (check null par try catch
 
-            Piece currentPiece = chessBoard.getPiece(p);
+        Piece currentPiece = chessBoard.getPiece(p);
 
-            List<ChessPosition> moveList = chessBoard.getPiece(p).getMoves(p, chessBoard);
-            List<ChessPosition> safeMoveList = new ArrayList<>();
+        List<ChessPosition> moveList = chessBoard.getPiece(p).getMoves(p, chessBoard);
+        List<ChessPosition> safeMoveList = new ArrayList<>();
 
-            // get all moves and only return ones that wont kill the king
-            for (ChessPosition positionToCheck : moveList) {
+        // get all moves and only return ones that wont kill the king
+        for (ChessPosition positionToCheck : moveList) {
 
-                ChessBoard clonedBoard = chessBoard.clone();
+            ChessBoard clonedBoard = chessBoard.clone();
 
-                clonedBoard.movePiece(p, positionToCheck);
+            clonedBoard.movePiece(p, positionToCheck);
 
-                //if king is safe
-                if (!ChessUtils.isKingInDanger(currentPiece.getPieceColor(), clonedBoard)) {
-                    safeMoveList.add(positionToCheck); // add to list
-                }
+            //if king is safe
+            if (!ChessUtils.isKingInDanger(currentPiece.getPieceColor(), clonedBoard)) {
+                safeMoveList.add(positionToCheck); // add to list
             }
+        }
 
-            return safeMoveList;
+        return safeMoveList;
     }
 
     @Override
     public void movePiece(ChessPosition p0, ChessPosition p1) {
-        chessBoard.movePiece(p0, p1);
+        Piece removedPiece = chessBoard.movePiece(p0, p1);
+        if (removedPiece != null){ // if a piece was removed
+            chessBoard.addRemovedPiece(removedPiece.getPieceType(),removedPiece.getPieceColor());
+        }
     }
 
     @Override
@@ -114,8 +117,7 @@ public class ChessModel implements IChess {
 
     @Override
     public List<ChessType> getRemovedPieces(ChessColor color) {
-
-        return new ArrayList<ChessType>();
+        return chessBoard.getRemovedPieces(color);
     }
 
     @Override

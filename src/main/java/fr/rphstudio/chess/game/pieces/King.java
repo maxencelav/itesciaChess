@@ -37,6 +37,7 @@ public class King implements IMove {
                 }
             }
         } catch (NullPointerException ignored){}
+        // throws error if rook doesn't exist and thus exits the roque move 
 
         return positions;
     }
