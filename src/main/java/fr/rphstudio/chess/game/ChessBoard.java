@@ -157,6 +157,10 @@ public class ChessBoard {
         return removedPiece;
     }
 
+    /**
+     * 
+     * @return
+     */
     public ChessBoard clone() {
         return new ChessBoard(this);
     }
