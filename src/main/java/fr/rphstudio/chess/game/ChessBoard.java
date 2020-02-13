@@ -11,6 +11,7 @@ public class ChessBoard {
     private Piece[][] board;
     private List<IChess.ChessType> removedWhitePieces = new ArrayList<IChess.ChessType>();
     private List<IChess.ChessType> removedBlackPieces = new ArrayList<IChess.ChessType>();
+    private PieceMoves moveList = new PieceMoves();
 
 
     public ChessBoard() {
