@@ -12,12 +12,14 @@ public class ChessModel implements IChess {
 
     private ChessBoard chessBoard;
     private TimeManager timer;
+    private PieceMoves pieceMoves;
 
 
     private ChessModel() {
-
         chessBoard = new ChessBoard();
         timer = new TimeManager();
+        pieceMoves = new PieceMoves(chessBoard, 0, ChessColor.CLR_WHITE);
+
     }
 
     /**
@@ -65,14 +67,11 @@ public class ChessModel implements IChess {
 
         for (int y = 0; y < BOARD_HEIGHT; y++) {
             for (int x = 0; x < BOARD_WIDTH; x++) {
-                //System.out.println(x + "," + y);
                 try {
-                    //System.out.println(chessBoard.getPiece(new ChessPosition(x, y)).getPieceColor());
                     if (chessBoard.getPiece(new ChessPosition(x, y)).getPieceColor() == color) {
                         colorCounter++;
                     }
                 } catch (NullPointerException e) {
-                    //System.out.println(e + "No color found");
                 }
 
             }
@@ -91,9 +90,7 @@ public class ChessModel implements IChess {
 
         // get all moves and only return ones that wont kill the king
         for (ChessPosition positionToCheck : moveList) {
-
             ChessBoard clonedBoard = chessBoard.clone();
-
             clonedBoard.movePiece(p, positionToCheck);
 
             //if king is safe
@@ -101,19 +98,19 @@ public class ChessModel implements IChess {
                 safeMoveList.add(positionToCheck); // add to list
             }
         }
-
         return safeMoveList;
     }
 
     @Override
     public void movePiece(ChessPosition p0, ChessPosition p1) {
+        ChessBoard boardBeforeMove = chessBoard.clone();
         Piece removedPiece = chessBoard.movePiece(p0, p1);
+        long turnTime = timer.changeTurn(chessBoard.getPiece(p1).getPieceColor());
+        pieceMoves.addMove(boardBeforeMove.clone(), turnTime, chessBoard.getPiece(p1).getPieceColor());
+
         if (removedPiece != null) { // if a piece was removed
             chessBoard.addRemovedPiece(removedPiece.getPieceType(), removedPiece.getPieceColor());
-
         }
-        timer.changeTurn(chessBoard.getPiece(p1).getPieceColor());
-
     }
 
     @Override
@@ -129,18 +126,22 @@ public class ChessModel implements IChess {
 
     @Override
     public boolean undoLastMove() {
-        return false;
+        boolean aaa = false;
+        Move lastMove = pieceMoves.getLastMove();
+
+        //if (lastMove != null) {
+        if (pieceMoves.getNumberOfTurns() > 1) {
+
+            this.timer.decreaseTime(lastMove.playerColor,lastMove.getTurnTime());
+            this.chessBoard = lastMove.getSavedBoard();
+            pieceMoves.removeLastMove();
+            aaa = true;
+        }
+        return aaa; // a changer pour que si jamais lastMove = null ça return false
     }
 
     @Override
     public long getPlayerDuration(ChessColor color, boolean isPlaying) {
-
-        //Stocker heure début dans long avec time mili
-        //qd qqun joue, noter temps -> faire la diff pour avoir le temps du tour
-        //stocker dans une jauge/var correspondant au temps de jeu
-
-        // 3 infos : h dernier coup, jauge de tous les coups, calc depuis dernier coup
-
         return timer.getPlayerTime(color, isPlaying);
     }
 }

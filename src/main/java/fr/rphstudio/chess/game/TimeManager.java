@@ -1,7 +1,6 @@
 package fr.rphstudio.chess.game;
 
 import fr.rphstudio.chess.interf.IChess;
-import org.lwjgl.Sys;
 
 public class TimeManager {
     long timeWhite = 0;
@@ -10,6 +9,7 @@ public class TimeManager {
 
     /**
      * Returns time of current turn
+     *
      * @return Time in milliseconds
      */
     public long getCurrentTime() {
@@ -25,7 +25,8 @@ public class TimeManager {
 
     /**
      * Returns current player playtime
-     * @param color Player color
+     *
+     * @param color     Player color
      * @param isPlaying Is it the player's turn (to update the timer value)
      * @return
      */
@@ -48,25 +49,38 @@ public class TimeManager {
         return time;
     }
 
-    public void decreaseTime(IChess.ChessColor color, int timeToRemove){
+    public void decreaseTime(IChess.ChessColor color, long timeToRemove) {
+
+        switch (color) {
+            case CLR_WHITE:
+                timeWhite -= timeToRemove;
+                break;
+            case CLR_BLACK:
+                timeBlack -= timeToRemove;
+                break;
+        }
 
     }
 
     /**
      * Adds turn time to the corresponding player and starts a new timer for the new turn
+     *
      * @param color Color of the player who's turn it is
+     * @return time of the turn
      */
-    public void changeTurn(IChess.ChessColor color) {
+    public long changeTurn(IChess.ChessColor color) {
+        long turnTime = getCurrentTime();
         switch (color) {
             case CLR_WHITE:
-                timeWhite += getCurrentTime();
+                timeWhite += turnTime;
                 break;
             case CLR_BLACK:
-                timeBlack += getCurrentTime();
+                timeBlack += turnTime;
                 break;
         }
 
         startNewTimer();
+        return turnTime;
     }
 
     /**

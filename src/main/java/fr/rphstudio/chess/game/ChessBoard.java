@@ -11,7 +11,7 @@ public class ChessBoard {
     private Piece[][] board;
     private List<IChess.ChessType> removedWhitePieces = new ArrayList<IChess.ChessType>();
     private List<IChess.ChessType> removedBlackPieces = new ArrayList<IChess.ChessType>();
-    private PieceMoves moveList = new PieceMoves();
+    private PieceMoves moveList;
 
     /**
      * Constructor for the board with the basic piece position for a game of chess
@@ -62,6 +62,15 @@ public class ChessBoard {
                 }
             }
         }
+
+        for (IChess.ChessType piece : originalBoard.removedBlackPieces){
+            this.removedBlackPieces.add(piece);
+        }
+        for (IChess.ChessType piece : originalBoard.removedWhitePieces){
+            this.removedWhitePieces.add(piece);
+        }
+
+        this.moveList = originalBoard.moveList;
     }
 
     /**
