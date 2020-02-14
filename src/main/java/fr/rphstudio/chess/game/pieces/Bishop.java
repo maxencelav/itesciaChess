@@ -7,6 +7,9 @@ import fr.rphstudio.chess.interf.IMove;
 
 import java.util.List;
 
+/**
+ * Class for the movement of Bishop pieces using IMove
+ */
 public class Bishop implements IMove {
 
     /**

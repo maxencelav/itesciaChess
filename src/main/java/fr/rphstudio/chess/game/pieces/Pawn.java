@@ -9,6 +9,9 @@ import fr.rphstudio.chess.interf.IMove;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the movement of Pawn pieces using IMove
+ */
 public class Pawn implements IMove {
 
     /**

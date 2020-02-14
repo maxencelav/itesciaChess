@@ -5,6 +5,9 @@ import fr.rphstudio.chess.interf.IChess;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utilities for Chess pieces
+ */
 public class ChessUtils {
     /**
      * Returns a ChessPosition if the position can exist on the board

@@ -8,6 +8,9 @@ import org.lwjgl.Sys;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the management of a chess game
+ */
 public class ChessModel implements IChess {
 
     private ChessBoard chessBoard;
@@ -15,6 +18,9 @@ public class ChessModel implements IChess {
     private PieceMoves pieceMoves;
 
 
+    /**
+     * Constructor of a chess game
+     */
     private ChessModel() {
         chessBoard = new ChessBoard(); // create a chess board
         timer = new TimeManager(); // create a timer

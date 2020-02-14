@@ -2,6 +2,9 @@ package fr.rphstudio.chess.game;
 
 import fr.rphstudio.chess.interf.IChess;
 
+/**
+ * Class for the management of time in a chess game
+ */
 public class TimeManager {
     long timeWhite = 0;
     long timeBlack = 0;

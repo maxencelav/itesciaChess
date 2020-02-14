@@ -4,6 +4,9 @@ import fr.rphstudio.chess.interf.IChess;
 
 import java.util.ArrayList;
 
+/**
+ * Class for the moves/turns of a chess game
+ */
 public class PieceMoves {
     private ArrayList<Move> moves;
 

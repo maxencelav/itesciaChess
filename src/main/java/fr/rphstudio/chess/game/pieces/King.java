@@ -8,6 +8,9 @@ import fr.rphstudio.chess.interf.IMove;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the movement of King pieces using IMove
+ */
 public class King implements IMove {
     /**
      * Gets possible moves for the King piece

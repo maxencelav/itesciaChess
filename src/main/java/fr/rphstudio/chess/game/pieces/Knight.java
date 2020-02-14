@@ -9,6 +9,9 @@ import fr.rphstudio.chess.interf.IMove;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the movement of Knight pieces using IMove
+ */
 public class Knight implements IMove {
 
     /**

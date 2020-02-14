@@ -6,6 +6,9 @@ import fr.rphstudio.chess.interf.IChess;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the creation of a Chess game board
+ */
 public class ChessBoard {
 
     private Piece[][] board;

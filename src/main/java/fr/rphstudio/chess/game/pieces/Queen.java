@@ -8,6 +8,9 @@ import fr.rphstudio.chess.interf.IMove;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the movement of Queen pieces using IMove
+ */
 public class Queen implements IMove {
     /**
      * Gets possible moves for the Queen piece

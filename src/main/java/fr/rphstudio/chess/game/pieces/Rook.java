@@ -7,6 +7,9 @@ import fr.rphstudio.chess.interf.IMove;
 
 import java.util.List;
 
+/**
+ * Class for the movement of Rook pieces using IMove
+ */
 public class Rook implements IMove {
     /**
      * Gets possible moves for the Rook piece

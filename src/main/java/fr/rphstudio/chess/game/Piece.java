@@ -6,6 +6,9 @@ import fr.rphstudio.chess.interf.IMove;
 
 import java.util.List;
 
+/**
+ * Class for the creation of chess pieces
+ */
 public class Piece {
 
     private IChess.ChessColor pieceColor;

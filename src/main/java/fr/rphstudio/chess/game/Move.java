@@ -2,6 +2,9 @@ package fr.rphstudio.chess.game;
 
 import fr.rphstudio.chess.interf.IChess;
 
+/**
+ * Class that contains all the information for one move in a Chess game
+ */
 public class Move {
 
     ChessBoard savedBoard;
