@@ -35,6 +35,10 @@ public class ChessModel implements IChess {
     private static ChessModel INSTANCE = new ChessModel();
 
 
+    /**
+     * Gets the unique instance
+     * @return instance
+     */
     public static IChess getInstance() {
         return INSTANCE;
     }

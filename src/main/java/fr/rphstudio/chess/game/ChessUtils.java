@@ -57,7 +57,7 @@ public class ChessUtils {
     }
 
     /**
-     * Returns possible moves in diagonal on the board
+     * Gets possible moves in diagonal on the board
      *
      * @param p     Position of the piece on the board
      * @param board Board where the piece is
@@ -87,7 +87,7 @@ public class ChessUtils {
     }
 
     /**
-     * Returns possible moves in orthogonal on the board
+     * Gets possible moves in orthogonal on the board
      *
      * @param p     Position of the piece on the board
      * @param board Board where the piece is

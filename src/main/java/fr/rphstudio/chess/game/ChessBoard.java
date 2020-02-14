@@ -87,6 +87,7 @@ public class ChessBoard {
     }
 
     /**
+     * Gets a Piece from the board
      * @param pos ChessPosition of the piece you want
      * @return the Piece at the given pos
      */
@@ -218,7 +219,7 @@ public class ChessBoard {
     }
 
     /**
-     * add pieces to the list of removed pieces
+     * Adds a piece type to the list of removed pieces
      *
      * @param type  type of the pieces removed
      * @param color color of the pieces removed
