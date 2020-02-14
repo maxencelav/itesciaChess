@@ -199,6 +199,11 @@ public class ChessModel implements IChess {
             this.chessBoard = lastMove.getSavedBoard(); // get the board from the previous move
             pieceMoves.removeLastMove(); // remove the move from the list now that it's back in the game
             hasMoveBeenReverted = true;
+
+            if (pieceMoves.getNumberOfTurns() == 1){ // if then we're at the first turn
+                this.timer.resetTimer(); // reset the timer (== restart the game timer)
+
+            }
         }
         return hasMoveBeenReverted;
     }
