@@ -31,7 +31,7 @@ public class TimeManager {
      *
      * @param color     Player color
      * @param isPlaying Is it the player's turn (to update the timer value)
-     * @return
+     * @return Time of the player's turn in milliseconds
      */
     public long getPlayerTime(IChess.ChessColor color, boolean isPlaying) {
         long time = 0;

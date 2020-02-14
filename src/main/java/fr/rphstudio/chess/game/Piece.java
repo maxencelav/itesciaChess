@@ -95,7 +95,7 @@ public class Piece {
 
     /**
      * Checks the number of moves of the Piece and returns true if it already has moved
-     * @return true if > 0, false if not
+     * @return true if superior to 0, false if not
      */
     public boolean hasMoved() {
         return (this.numberOfTurns > 0);

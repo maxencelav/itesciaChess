@@ -56,8 +56,8 @@ public class ChessModel implements IChess {
      *
      * @param p x/y position on the board where we want to get the piece type.
      * @return the piece type
-     * @throws EmptyCellException
-     * @throws OutOfBoardException
+     * @throws EmptyCellException If the cell is empty
+     * @throws OutOfBoardException If the cell is out of the board
      */
     @Override
     public ChessType getPieceType(ChessPosition p) throws EmptyCellException, OutOfBoardException {
@@ -75,8 +75,8 @@ public class ChessModel implements IChess {
      *
      * @param p x/y position on the board where we want to get the piece color.
      * @return the piece color
-     * @throws EmptyCellException
-     * @throws OutOfBoardException
+     * @throws EmptyCellException If the cell is empty
+     * @throws OutOfBoardException If the cell is out of the board
      */
     @Override
     public ChessColor getPieceColor(ChessPosition p) throws EmptyCellException, OutOfBoardException {
